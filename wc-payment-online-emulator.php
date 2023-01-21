@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WooCommerce Online Gateway Emulator
+ * Plugin Name: WooCommerce Payment Online Gateway Emulator
  * Author: A
  * Version: 1.0.2
  *
@@ -8,7 +8,7 @@
  * Tested up to: 5.6
  * Requires PHP: 7.2+
  * WC requires at least: 3.4.0
- * WC tested up to: 4.9.0
+ * WC tested up to: 7.3.0
  *
  * Text Domain: wc-gateway-online
  */
