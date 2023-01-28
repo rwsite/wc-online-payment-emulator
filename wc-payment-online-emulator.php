@@ -21,8 +21,8 @@ add_action('plugins_loaded', function (){
     if (!function_exists('WC')) {
         add_action( 'admin_notices', function(){ ?>
             <div class="notice notice-error is-dismissible"><p>
-                    <?php echo __('Woocommerce is not activated. To work "Pay2Do - Payment woocommerce gateway" plugin, 
-                you need to install and activate WooCommerce', 'wc-pus'); ?></p>
+                    <?php echo __('Woocommerce is not activated. To work "WooCommerce Payment Online Gateway Emulator" plugin, 
+                you need to install and activate WooCommerce', 'wc-gateway-online'); ?></p>
             </div>
         <?php });
         return;
@@ -30,7 +30,9 @@ add_action('plugins_loaded', function (){
 });
 
 
-/** Add the gateway to WC Available Gateways */
+/** 
+ * Add the gateway to WC Available Gateways
+*/
 function wc_online_add_to_gateways( $gateways ) {
     $gateways[] = 'WC_Gateway_Online';
     return $gateways;
@@ -39,7 +41,7 @@ add_filter( 'woocommerce_payment_gateways', 'wc_online_add_to_gateways' );
 
 
 /**
- * Adds settings
+ * Adds settings link
  */
 function wc_online_gateway_plugin_links( $links ) {
 
@@ -177,10 +179,10 @@ function wc_online_gateway_init() {
                 // Remove cart.
                 wc_empty_cart();
 
-                $order->add_order_note(__('The client started to pay.', 'plugin'));
+                $order->add_order_note(__('The client started paying.', 'plugin'));
                 // .... payment process
-                $order->add_order_note(__('The client canceled to pay.', 'plugin'));
-                $order->update_status( 'complete', __('Order successfully paid online', 'plugin') );
+                $order->add_order_note(__('The client completed the payment.', 'plugin'));
+                $order->update_status( 'complete', __('The order was successfully paid online', 'plugin') );
                 $order->payment_complete($bill_id);
 
 
