@@ -67,8 +67,8 @@ function wc_online_gateway_init() {
             $this->id                 = 'online_gateway';
             $this->icon               = apply_filters('woocommerce_online_icon', '');
             $this->has_fields         = false;
-            $this->method_title       = __( 'Online', 'wc-gateway-online' );
-            $this->method_description = __( 'Allows online payments. Very handy if you use your cheque gateway for another payment method, and can help with testing. Orders are marked as "on-hold" when received.', 'wc-gateway-online' );
+            $this->method_title       = __( 'Online payment', 'wc-gateway-online' );
+            $this->method_description = __( 'Online payment without any API action.', 'wc-gateway-online' );
 
             // Load the settings.
             $this->init_form_fields();
@@ -105,7 +105,7 @@ function wc_online_gateway_init() {
                 'title' => array(
                     'title'       => __( 'Title', 'wc-gateway-online' ),
                     'type'        => 'text',
-                    'description' => __( 'This controls the title for the payment method the customer sees during checkout.', 'wc-gateway-online' ),
+                    'description' => __( 'This controls the title.', 'wc-gateway-online' ),
                     'default'     => __( 'Online Payment', 'wc-gateway-online' ),
                     'desc_tip'    => true,
                 ),
@@ -114,7 +114,7 @@ function wc_online_gateway_init() {
                     'title'       => __( 'Description', 'wc-gateway-online' ),
                     'type'        => 'textarea',
                     'description' => __( 'Payment method description that the customer will see on your checkout.', 'wc-gateway-online' ),
-                    'default'     => __( 'Please remit payment to Store Name upon pickup or delivery.', 'wc-gateway-online' ),
+                    'default'     => __( 'Please send me a money.', 'wc-gateway-online' ),
                     'desc_tip'    => true,
                 ),
 
