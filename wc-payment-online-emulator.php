@@ -114,7 +114,7 @@ function wc_online_gateway_init() {
                     'title'       => __( 'Description', 'wc-gateway-online' ),
                     'type'        => 'textarea',
                     'description' => __( 'Payment method description that the customer will see on your checkout.', 'wc-gateway-online' ),
-                    'default'     => __( 'Please send me a money.', 'wc-gateway-online' ),
+                    'default'     => __( 'Please send me some money.', 'wc-gateway-online' ),
                     'desc_tip'    => true,
                 ),
 
