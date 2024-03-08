@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) or exit;
 
 // Make sure WooCommerce is active
 add_action('plugins_loaded', function (){
+
     if (!function_exists('WC')) {
         add_action( 'admin_notices', function(){ ?>
             <div class="notice notice-error is-dismissible"><p>
@@ -27,6 +28,16 @@ add_action('plugins_loaded', function (){
         <?php });
         return;
     }
+
+    add_action( 'before_woocommerce_init', function() {
+        if( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+            \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
+                'custom_order_tables',
+                __FILE__,
+                true // true (compatible, default) or false (not compatible)
+            );
+        }
+    });
 });
 
 
