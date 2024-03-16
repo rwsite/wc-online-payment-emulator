@@ -1,14 +1,15 @@
 <?php
 /**
  * Plugin Name: WooCommerce Payment Online Gateway Emulator
- * Author: A
- * Version: 1.0.2
+ * Author: Aleksei Tikhomirov
+ * Version: 1.0.3
  *
  * Requires at least: 4.6
- * Tested up to: 5.6
- * Requires PHP: 7.2+
+ * Tested up to: 6.4.3
+ *
+ * Requires PHP: 7.4+
  * WC requires at least: 3.4.0
- * WC tested up to: 7.3.0
+ * WC tested up to: 8.6.2
  *
  * Text Domain: wc-gateway-online
  */
