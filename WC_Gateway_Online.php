@@ -29,6 +29,8 @@ class WC_Gateway_Online extends WC_Payment_Gateway
         add_action('woocommerce_update_options_payment_gateways_' . $this->id, [$this, 'process_admin_options']);
         add_action('woocommerce_thankyou_' . $this->id, [$this, 'thankyou_page']);
 
+        add_action('woocommerce_receipt_'.$this->id, array($this, 'receipt_page'));
+
         // Customer Emails
         add_action('woocommerce_email_before_order_table', [$this, 'email_instructions'], 10, 3);
     }
@@ -110,28 +112,50 @@ class WC_Gateway_Online extends WC_Payment_Gateway
 //        }
     }
 
+    public function receipt_page($order_id)
+    {
+        $order = new WC_Order($order_id);
+        echo 'Редирект на внешнюю оплату..';
+
+        wp_redirect($this->get_return_url());
+    }
+
 
     /**
      * Process the payment and return the result
      */
-    public function process_payment($order_id):array
+    public function process_payment($order_id): array
     {
         $order = wc_get_order($order_id);
 
+        return [
+            'result'   => 'success',
+            'redirect' => $order->get_checkout_payment_url($order)
+        ];
+    }
+
+    private function real_pay()
+    {
+
+    }
+
+    private function virtual_pay($order)
+    {
+
         if ($order->get_status() === 'pending') {
             // Get processed data.
-            $order   = wc_get_order($order_id);
+            $order   = wc_get_order($order->get_id());
             $bill_id = wp_rand(0, 99999999999999999);
             $order->set_transaction_id($bill_id);
 
             // Reduce stock levels.
             wc_reduce_stock_levels($order->get_id());
-
             // Remove cart.
             wc_empty_cart();
 
             $order->add_order_note(__('The client started paying.', 'plugin'));
             // .... payment process
+
             $order->add_order_note(__('The client completed the payment.', 'plugin'));
             $order->update_status('complete', __('The order was successfully paid online', 'plugin'));
             $order->payment_complete($bill_id);
