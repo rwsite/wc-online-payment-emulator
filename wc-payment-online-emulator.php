@@ -1,17 +1,22 @@
 <?php
 /**
  * Plugin Name: WooCommerce Payment Online Gateway Emulator
+ * Description: WooCommerce Payment Online Gateway Emulator
  * Author: Aleksei Tikhomirov
+ *
  * Version: 1.0.3
  *
  * Requires at least: 4.6
- * Tested up to: 6.4.3
+ * Tested up to: 6.7.2
  *
- * Requires PHP: 7.4+
+ * Requires PHP: 7.4
+ * Recommend PHP: 8.3
+ *
  * WC requires at least: 3.4.0
  * WC tested up to: 8.6.2
  *
- * Text Domain: wc-gateway-online
+ * Text Domain: wc-online-payment-emulator
+ * license: GPL3.0+
  */
 
 use Automattic\WooCommerce\Utilities\FeaturesUtil;
@@ -47,7 +52,7 @@ add_action('plugins_loaded', function () {
 function wc_online_gateway_plugin_links($links): array
 {
     $link = admin_url('admin.php?page=wc-settings&tab=checkout&section=online_gateway');
-    $text = __('Configure','wc-gateway-online');
+    $text = __('Configure','wc-online-payment-emulator');
     $plugin_links = ['<a href="' . $link . '">' . $text . '</a>'];
 
     return array_merge($plugin_links, $links);
@@ -55,6 +60,6 @@ function wc_online_gateway_plugin_links($links): array
 
 function wc_online_notice(){
     $msg = __('Woocommerce is not activated. To work "WooCommerce Payment Online Gateway Emulator" plugin, 
-                you need to install and activate WooCommerce','wc-gateway-online');
+                you need to install and activate WooCommerce','wc-online-payment-emulator');
     echo '<div class="notice notice-error is-dismissible"><p>'. $msg . '</p></div>';
 }

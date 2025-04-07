@@ -13,8 +13,8 @@ class WC_Gateway_Online extends WC_Payment_Gateway
         $this->id                 = 'online_gateway';
         $this->icon               = apply_filters('woocommerce_online_icon', '');
         $this->has_fields         = false;
-        $this->method_title       = __('Online payment', 'wc-gateway-online');
-        $this->method_description = __('Online payment without any API action.', 'wc-gateway-online');
+        $this->method_title       = __('Online payment', 'wc-online-payment-emulator');
+        $this->method_description = __('Online payment without any API action.', 'wc-online-payment-emulator');
 
         // Load the settings.
         $this->init_form_fields();
@@ -44,37 +44,37 @@ class WC_Gateway_Online extends WC_Payment_Gateway
         $this->form_fields = apply_filters('wc_online_form_fields', [
 
             'enabled' => [
-                'title'   => __('Enable/Disable', 'wc-gateway-online'),
+                'title'   => __('Enable/Disable', 'wc-online-payment-emulator'),
                 'type'    => 'checkbox',
-                'label'   => __('Enable Online Payment', 'wc-gateway-online'),
+                'label'   => __('Enable Online Payment', 'wc-online-payment-emulator'),
                 'default' => 'yes'
             ],
 
             'title' => [
-                'title'       => __('Title', 'wc-gateway-online'),
+                'title'       => __('Title', 'wc-online-payment-emulator'),
                 'type'        => 'text',
-                'description' => __('This controls the title.', 'wc-gateway-online'),
-                'default'     => __('Online Payment', 'wc-gateway-online'),
+                'description' => __('This controls the title.', 'wc-online-payment-emulator'),
+                'default'     => __('Online Payment', 'wc-online-payment-emulator'),
                 'desc_tip'    => true,
             ],
 
             'description' => [
-                'title'       => __('Description', 'wc-gateway-online'),
+                'title'       => __('Description', 'wc-online-payment-emulator'),
                 'type'        => 'textarea',
                 'description' => __(
                     'Payment method description that the customer will see on your checkout.',
-                    'wc-gateway-online'
+                    'wc-online-payment-emulator'
                 ),
-                'default'     => __('Please send me some money.', 'wc-gateway-online'),
+                'default'     => __('Please send me some money.', 'wc-online-payment-emulator'),
                 'desc_tip'    => true,
             ],
 
             'instructions' => [
-                'title'       => __('Instructions', 'wc-gateway-online'),
+                'title'       => __('Instructions', 'wc-online-payment-emulator'),
                 'type'        => 'textarea',
                 'description' => __(
                     'Instructions that will be added to the thank you page and emails.',
-                    'wc-gateway-online'
+                    'wc-online-payment-emulator'
                 ),
                 'default'     => '',
                 'desc_tip'    => true,
@@ -153,11 +153,11 @@ class WC_Gateway_Online extends WC_Payment_Gateway
             // Remove cart.
             wc_empty_cart();
 
-            $order->add_order_note(__('The client started paying.', 'plugin'));
+            $order->add_order_note(__('The client started paying.', 'wc-online-payment-emulator'));
             // .... payment process
 
-            $order->add_order_note(__('The client completed the payment.', 'plugin'));
-            $order->update_status('complete', __('The order was successfully paid online', 'plugin'));
+            $order->add_order_note(__('The client completed the payment.', 'wc-online-payment-emulator'));
+            $order->update_status('complete', __('The order was successfully paid online', 'wc-online-payment-emulator'));
             $order->payment_complete($bill_id);
         } elseif ( ! $order->is_paid() && $order->get_status() === 'cancelled') {
             error_log('fail');
